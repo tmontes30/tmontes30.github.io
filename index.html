@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CaveDevz — Portfolio</title>
+<meta name="description" content="Portfolio de CaveDevz — proyectos de desarrollo full-stack.">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="bg-grid" aria-hidden="true"></div>
+
+<header class="nav" id="nav">
+  <a href="#top" class="logo">
+    <svg viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+      <path d="M22 20 L12 32 L22 44" stroke="url(#navGrad)" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M42 20 L52 32 L42 44" stroke="url(#navGrad)" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M36 16 L28 48" stroke="url(#navGrad)" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <defs>
+        <linearGradient id="navGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#7c5cff"/>
+          <stop offset="100%" stop-color="#22d3ee"/>
+        </linearGradient>
+      </defs>
+    </svg>
+    <span>Cave<em>Devz</em></span>
+  </a>
+  <nav class="nav-links">
+    <a href="#proyectos">Proyectos</a>
+    <a href="#about">About</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+  <a href="#contacto" class="btn btn-ghost nav-cta">Hablemos</a>
+  <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<main>
+  <section class="hero" id="top">
+    <p class="hero-eyebrow">$ whoami</p>
+    <h1 class="hero-title">
+      Construyo software que <span class="grad-text">resuelve problemas reales</span>.
+    </h1>
+    <p class="hero-sub">
+      Desarrollador full-stack. Diseño y construyo aplicaciones web de principio a fin —
+      desde el frontend hasta la base de datos y la infraestructura que las mantiene vivas.
+    </p>
+    <div class="hero-actions">
+      <a href="#proyectos" class="btn btn-primary">Ver proyectos</a>
+      <a href="https://github.com/tmontes30" target="_blank" rel="noopener" class="btn btn-ghost">GitHub ↗</a>
+    </div>
+
+    <div class="terminal" role="img" aria-label="Terminal decorativo mostrando el stack de CaveDevz">
+      <div class="terminal-bar">
+        <span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span>
+        <span class="terminal-title">cavedevz — zsh</span>
+      </div>
+      <div class="terminal-body">
+        <p><span class="prompt">➜</span> <span class="cmd">cat</span> stack.json</p>
+        <p class="out">{</p>
+        <p class="out">&nbsp;&nbsp;"languages": ["JavaScript", "SQL", "HTML/CSS"],</p>
+        <p class="out">&nbsp;&nbsp;"backend": ["Node.js", "Supabase", "Firebase"],</p>
+        <p class="out">&nbsp;&nbsp;"focus": "shipping cosas que la gente usa"</p>
+        <p class="out">}</p>
+        <p><span class="prompt">➜</span> <span class="cursor">_</span></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="proyectos" id="proyectos">
+    <div class="section-head">
+      <p class="section-eyebrow">// proyectos</p>
+      <h2>Lo que he construido</h2>
+    </div>
+
+    <div class="cards">
+      <article class="card">
+        <div class="card-top">
+          <span class="card-tag">Fintech</span>
+        </div>
+        <h3>Finance Service</h3>
+        <p>
+          Plataforma de finanzas personales que procesa extractos bancarios de forma automática,
+          extrae los movimientos y los organiza en un panel claro para llevar el control del dinero.
+        </p>
+        <ul class="stack">
+          <li>JavaScript</li>
+          <li>Supabase</li>
+          <li>PostgreSQL</li>
+          <li>Firebase</li>
+        </ul>
+        <div class="card-actions">
+          <a href="https://finance.cavedevz.com" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Ver sitio ↗</a>
+          <a href="https://github.com/tmontes30/Finance-Service" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">Código ↗</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-top">
+          <span class="card-tag">Logística</span>
+        </div>
+        <h3>Puntos Colaborativos Falabella</h3>
+        <p>
+          Mapa interactivo para que vendedores encuentren su punto de recolección colaborativa
+          más cercano, con distancias calculadas en tiempo real y filtros por zona y disponibilidad.
+        </p>
+        <ul class="stack">
+          <li>JavaScript</li>
+          <li>Leaflet</li>
+          <li>OpenStreetMap</li>
+          <li>Node.js</li>
+        </ul>
+        <div class="card-actions">
+          <a href="https://puntos-colaborativos-falabella.cavedevz.com" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Ver sitio ↗</a>
+          <a href="https://github.com/tmontes30/Puntos-Colaborativos-Falabella" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">Código ↗</a>
+        </div>
+      </article>
+
+      <article class="card card-more">
+        <div class="card-more-inner">
+          <p class="more-icon">+</p>
+          <p>Más proyectos en camino</p>
+          <a href="https://github.com/tmontes30" target="_blank" rel="noopener" class="link-inline">Ver todo en GitHub ↗</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <div class="section-head">
+      <p class="section-eyebrow">// about</p>
+      <h2>Un poco sobre mí</h2>
+    </div>
+    <div class="about-grid">
+      <p class="about-text">
+        Soy desarrollador full-stack enfocado en construir productos completos: desde la interfaz
+        que usa la gente hasta el backend y la base de datos que la sostienen. Me interesa
+        especialmente resolver problemas concretos — automatizar procesos manuales, ordenar datos
+        desordenados y hacer que la tecnología se sienta simple, aunque no lo sea por dentro.
+        <br><br>
+        <em>(Este texto es un placeholder — reemplázalo con tu bio real cuando quieras.)</em>
+      </p>
+      <div class="about-badges">
+        <span>JavaScript</span>
+        <span>Node.js</span>
+        <span>Supabase</span>
+        <span>Firebase</span>
+        <span>SQL</span>
+        <span>Git</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="contacto" id="contacto">
+    <div class="section-head center">
+      <p class="section-eyebrow">// contacto</p>
+      <h2>Construyamos algo</h2>
+      <p class="contact-sub">¿Tienes un proyecto en mente o quieres conversar? Escríbeme.</p>
+    </div>
+    <div class="contact-links">
+      <a href="mailto:tu-correo@cavedevz.com" class="contact-link">
+        <span>Email</span>
+        <strong>tu-correo@cavedevz.com</strong>
+      </a>
+      <a href="https://github.com/tmontes30" target="_blank" rel="noopener" class="contact-link">
+        <span>GitHub</span>
+        <strong>@tmontes30</strong>
+      </a>
+      <a href="#" class="contact-link">
+        <span>LinkedIn</span>
+        <strong>Agregar link</strong>
+      </a>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <p>© <span id="year"></span> CaveDevz. Construido con HTML, CSS y JS puro.</p>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
