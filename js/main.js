@@ -77,5 +77,224 @@ if (!prefersReducedMotion && window.matchMedia('(pointer: fine)').matches) {
   });
 }
 
+// Custom magnetic cursor
+if (!prefersReducedMotion && window.matchMedia('(pointer: fine)').matches) {
+  document.documentElement.classList.add('has-custom-cursor');
+  const cursorDot = document.getElementById('cursorDot');
+  const cursorRing = document.getElementById('cursorRing');
+  let mouseX = window.innerWidth / 2;
+  let mouseY = window.innerHeight / 2;
+  let ringX = mouseX;
+  let ringY = mouseY;
+
+  window.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    cursorDot.style.transform = `translate(${mouseX}px, ${mouseY}px) translate(-50%, -50%)`;
+  });
+
+  (function animateRing() {
+    ringX += (mouseX - ringX) * 0.15;
+    ringY += (mouseY - ringY) * 0.15;
+    cursorRing.style.transform = `translate(${ringX}px, ${ringY}px) translate(-50%, -50%)`;
+    requestAnimationFrame(animateRing);
+  })();
+
+  document.querySelectorAll('.btn, .card, .contact-link, .terminal-trigger, .whatsapp-float, .nav-links a').forEach((el) => {
+    el.addEventListener('mouseenter', () => cursorRing.classList.add('cursor-hover'));
+    el.addEventListener('mouseleave', () => cursorRing.classList.remove('cursor-hover'));
+  });
+
+  // Magnetic pull on standalone buttons (cards already have their own tilt effect)
+  document.querySelectorAll('.btn, .terminal-trigger, .whatsapp-float').forEach((el) => {
+    el.addEventListener('mousemove', (e) => {
+      const rect = el.getBoundingClientRect();
+      const relX = e.clientX - rect.left - rect.width / 2;
+      const relY = e.clientY - rect.top - rect.height / 2;
+      el.style.transform = `translate(${relX * 0.25}px, ${relY * 0.25}px)`;
+    });
+    el.addEventListener('mouseleave', () => {
+      el.style.transform = '';
+    });
+  });
+}
+
+// Ambient particle canvas that reacts to the cursor
+const particleCanvas = document.getElementById('particleCanvas');
+if (particleCanvas && !prefersReducedMotion) {
+  const ctx = particleCanvas.getContext('2d');
+  let particles = [];
+  const mouse = { x: null, y: null };
+
+  function resizeCanvas() {
+    particleCanvas.width = window.innerWidth;
+    particleCanvas.height = window.innerHeight;
+  }
+
+  function initParticles() {
+    const count = Math.min(70, Math.floor((particleCanvas.width * particleCanvas.height) / 22000));
+    particles = Array.from({ length: count }, () => ({
+      x: Math.random() * particleCanvas.width,
+      y: Math.random() * particleCanvas.height,
+      vx: (Math.random() - 0.5) * 0.3,
+      vy: (Math.random() - 0.5) * 0.3,
+    }));
+  }
+
+  resizeCanvas();
+  initParticles();
+  window.addEventListener('resize', () => {
+    resizeCanvas();
+    initParticles();
+  });
+  window.addEventListener('mousemove', (e) => {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+  });
+  window.addEventListener('mouseleave', () => {
+    mouse.x = null;
+    mouse.y = null;
+  });
+
+  function drawParticles() {
+    ctx.clearRect(0, 0, particleCanvas.width, particleCanvas.height);
+
+    particles.forEach((p) => {
+      p.x += p.vx;
+      p.y += p.vy;
+      if (p.x < 0 || p.x > particleCanvas.width) p.vx *= -1;
+      if (p.y < 0 || p.y > particleCanvas.height) p.vy *= -1;
+    });
+
+    for (let i = 0; i < particles.length; i++) {
+      const p = particles[i];
+
+      if (mouse.x !== null) {
+        const dx = p.x - mouse.x;
+        const dy = p.y - mouse.y;
+        const dist = Math.hypot(dx, dy);
+        if (dist < 140) {
+          ctx.strokeStyle = `rgba(124,92,255,${(1 - dist / 140) * 0.5})`;
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(mouse.x, mouse.y);
+          ctx.stroke();
+        }
+      }
+
+      for (let j = i + 1; j < particles.length; j++) {
+        const q = particles[j];
+        const dx = p.x - q.x;
+        const dy = p.y - q.y;
+        const dist = Math.hypot(dx, dy);
+        if (dist < 110) {
+          ctx.strokeStyle = `rgba(34,211,238,${(1 - dist / 110) * 0.25})`;
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(q.x, q.y);
+          ctx.stroke();
+        }
+      }
+
+      ctx.fillStyle = 'rgba(232,232,240,0.5)';
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, 1.6, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    requestAnimationFrame(drawParticles);
+  }
+  drawParticles();
+}
+
+// Terminal / command palette
+const terminalOverlay = document.getElementById('terminalOverlay');
+const terminalInput = document.getElementById('terminalInput');
+const terminalBody = document.getElementById('terminalBody');
+const terminalTrigger = document.getElementById('terminalTrigger');
+
+function openTerminal() {
+  terminalOverlay.hidden = false;
+  document.body.style.overflow = 'hidden';
+  setTimeout(() => terminalInput.focus(), 10);
+}
+function closeTerminal() {
+  terminalOverlay.hidden = true;
+  document.body.style.overflow = '';
+}
+
+terminalTrigger.addEventListener('click', openTerminal);
+terminalOverlay.addEventListener('click', (e) => {
+  if (e.target === terminalOverlay) closeTerminal();
+});
+
+document.addEventListener('keydown', (e) => {
+  const tag = document.activeElement.tagName;
+  if (e.key === '/' && tag !== 'INPUT' && tag !== 'TEXTAREA') {
+    e.preventDefault();
+    openTerminal();
+  } else if (e.key === 'Escape' && !terminalOverlay.hidden) {
+    closeTerminal();
+  }
+});
+
+const terminalCommands = {
+  help: 'Comandos disponibles: proyectos, about, contacto, whatsapp, github, linkedin, whoami, sudo, clear',
+  proyectos: { goto: '#proyectos' },
+  proyecto: { goto: '#proyectos' },
+  about: { goto: '#about' },
+  contacto: { goto: '#contacto' },
+  contact: { goto: '#contacto' },
+  whatsapp: { open: 'https://wa.me/56992259960' },
+  github: { open: 'https://github.com/tmontes30' },
+  linkedin: { open: 'https://www.linkedin.com/in/tomas-montesa/' },
+  whoami: 'Tomás Montes — desarrollador full-stack. Construye software que resuelve problemas reales.',
+  sudo: 'Permiso denegado. Pero un mensaje por WhatsApp seguro funciona — probá "whatsapp".',
+};
+
+function printTerminalLine(text) {
+  const p = document.createElement('p');
+  p.textContent = text;
+  terminalBody.appendChild(p);
+  terminalBody.scrollTop = terminalBody.scrollHeight;
+}
+
+terminalInput.addEventListener('keydown', (e) => {
+  if (e.key !== 'Enter') return;
+  const raw = terminalInput.value.trim();
+  if (!raw) return;
+
+  printTerminalLine('guest@cavedevz:~$ ' + raw);
+  const cmd = raw.toLowerCase();
+  terminalInput.value = '';
+
+  if (cmd === 'clear') {
+    terminalBody.innerHTML = '';
+    return;
+  }
+
+  const entry = terminalCommands[cmd];
+  if (!entry) {
+    printTerminalLine(`command not found: ${cmd} — probá "help"`);
+    return;
+  }
+
+  if (typeof entry === 'string') {
+    printTerminalLine(entry);
+  } else if (entry.goto) {
+    printTerminalLine('Abriendo ' + cmd + '...');
+    setTimeout(() => {
+      closeTerminal();
+      document.querySelector(entry.goto).scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+    }, 300);
+  } else if (entry.open) {
+    printTerminalLine('Abriendo ' + cmd + ' en una pestaña nueva...');
+    setTimeout(() => window.open(entry.open, '_blank', 'noopener'), 250);
+  }
+});
+
+
 
 
