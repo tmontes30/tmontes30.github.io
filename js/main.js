@@ -43,6 +43,24 @@ if (!prefersReducedMotion) {
   });
 }
 
+// Eye-catching glow on the contact cards once the user reaches the bottom
+const contactoSection = document.getElementById('contacto');
+const contactLinksEl = document.querySelector('.contact-links');
+if (contactoSection && contactLinksEl && !prefersReducedMotion) {
+  const contactObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          contactLinksEl.classList.add('glow-active');
+          contactObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.4 }
+  );
+  contactObserver.observe(contactoSection);
+}
+
 const bgGrid = document.querySelector('.bg-grid');
 const glowField = document.querySelector('.glow-field');
 const scrollProgress = document.getElementById('scrollProgress');
@@ -169,17 +187,32 @@ if (particleCanvas && !prefersReducedMotion) {
     for (let i = 0; i < particles.length; i++) {
       const p = particles[i];
 
+      ctx.fillStyle = 'rgba(232,232,240,0.5)';
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, 1.6, 0, Math.PI * 2);
+      ctx.fill();
+
       if (mouse.x !== null) {
         const dx = p.x - mouse.x;
         const dy = p.y - mouse.y;
         const dist = Math.hypot(dx, dy);
-        if (dist < 140) {
-          ctx.strokeStyle = `rgba(124,92,255,${(1 - dist / 140) * 0.5})`;
-          ctx.lineWidth = 1;
+        if (dist < 190) {
+          const proximity = 1 - dist / 190;
+          ctx.save();
+          ctx.shadowBlur = 10;
+          ctx.shadowColor = 'rgba(34,211,238,0.9)';
+          ctx.strokeStyle = `rgba(34,211,238,${proximity * 0.95})`;
+          ctx.lineWidth = 1.8;
           ctx.beginPath();
           ctx.moveTo(p.x, p.y);
           ctx.lineTo(mouse.x, mouse.y);
           ctx.stroke();
+          ctx.restore();
+
+          ctx.fillStyle = `rgba(255,255,255,${0.5 + proximity * 0.5})`;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, 1.6 + proximity * 1.8, 0, Math.PI * 2);
+          ctx.fill();
         }
       }
 
@@ -197,11 +230,6 @@ if (particleCanvas && !prefersReducedMotion) {
           ctx.stroke();
         }
       }
-
-      ctx.fillStyle = 'rgba(232,232,240,0.5)';
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, 1.6, 0, Math.PI * 2);
-      ctx.fill();
     }
 
     requestAnimationFrame(drawParticles);
@@ -504,6 +532,7 @@ terminalInput.addEventListener('keydown', (e) => {
     setTimeout(() => window.open(entry.open, '_blank', 'noopener'), 250);
   }
 });
+
 
 
 
