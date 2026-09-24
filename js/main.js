@@ -241,7 +241,6 @@ document.addEventListener('keydown', (e) => {
 });
 
 const terminalCommands = {
-  help: 'Comandos disponibles: proyectos, about, contacto, whatsapp, github, linkedin, whoami, sudo, clear',
   proyectos: { goto: '#proyectos' },
   proyecto: { goto: '#proyectos' },
   about: { goto: '#about' },
@@ -254,11 +253,164 @@ const terminalCommands = {
   sudo: 'Permiso denegado. Pero un mensaje por WhatsApp seguro funciona — probá "whatsapp".',
 };
 
+const terminalState = { mode: null, guessTarget: 0, guessAttempts: 0, history: [] };
+
+const terminalJokes = [
+  '¿Por qué los programadores prefieren el frío? Porque odian los bugs.',
+  'Hay 10 tipos de personas: las que entienden binario y las que no.',
+  '99 problemas y todos son de CSS.',
+  'Un SQL entra a un bar, se acerca a dos mesas y pregunta: "¿Puedo hacer un JOIN?"',
+  'Mi código no tiene bugs, solo funcionalidades inesperadas.',
+];
+const terminalFortunes = [
+  'El mejor código es el que no tenés que escribir.',
+  'Todo bug es una feature que todavía no documentaste.',
+  'Primero hacelo funcionar, después hacelo bien, después hacelo rápido.',
+  'La deuda técnica siempre cobra intereses.',
+  'Un commit sin mensaje claro es un regalo envenenado para tu yo del futuro.',
+];
+
 function printTerminalLine(text) {
   const p = document.createElement('p');
   p.textContent = text;
   terminalBody.appendChild(p);
   terminalBody.scrollTop = terminalBody.scrollHeight;
+}
+
+function typeTerminalLines(lines, delay) {
+  let i = 0;
+  (function next() {
+    if (i >= lines.length) return;
+    printTerminalLine(lines[i]);
+    i++;
+    setTimeout(next, delay);
+  })();
+}
+
+function handleGuessInput(raw) {
+  if (/^(salir|exit|cancelar)$/i.test(raw)) {
+    printTerminalLine('Juego cancelado. El número era ' + terminalState.guessTarget + '.');
+    terminalState.mode = null;
+    return;
+  }
+  const n = Number(raw);
+  if (!Number.isInteger(n) || n < 1 || n > 100) {
+    printTerminalLine('Escribí un número entero entre 1 y 100 (o "salir").');
+    return;
+  }
+  terminalState.guessAttempts++;
+  if (n === terminalState.guessTarget) {
+    printTerminalLine(`¡Exacto! Era ${n}. Lo lograste en ${terminalState.guessAttempts} intento${terminalState.guessAttempts === 1 ? '' : 's'}.`);
+    terminalState.mode = null;
+  } else if (n < terminalState.guessTarget) {
+    printTerminalLine('Más alto ↑');
+  } else {
+    printTerminalLine('Más bajo ↓');
+  }
+}
+
+function playRps(userChoiceRaw) {
+  const map = { piedra: 'piedra', rock: 'piedra', papel: 'papel', paper: 'papel', tijera: 'tijera', tijeras: 'tijera', scissors: 'tijera' };
+  const userChoice = map[(userChoiceRaw || '').toLowerCase()];
+  if (!userChoice) {
+    printTerminalLine('Uso: rps piedra|papel|tijera');
+    return;
+  }
+  const options = ['piedra', 'papel', 'tijera'];
+  const cpuChoice = options[Math.floor(Math.random() * 3)];
+  let result;
+  if (userChoice === cpuChoice) {
+    result = 'Empate';
+  } else if (
+    (userChoice === 'piedra' && cpuChoice === 'tijera') ||
+    (userChoice === 'papel' && cpuChoice === 'piedra') ||
+    (userChoice === 'tijera' && cpuChoice === 'papel')
+  ) {
+    result = 'Ganaste';
+  } else {
+    result = 'Perdiste';
+  }
+  printTerminalLine(`Vos: ${userChoice} — CPU: ${cpuChoice} → ${result}`);
+}
+
+function runCalc(expr) {
+  if (!/^[0-9+\-*/().\s]+$/.test(expr) || !expr.trim()) {
+    printTerminalLine('Uso: calc <expresión> — solo números y + - * / ( )');
+    return;
+  }
+  try {
+    const result = Function('"use strict";return (' + expr + ')')();
+    printTerminalLine(expr.trim() + ' = ' + result);
+  } catch (err) {
+    printTerminalLine('Expresión inválida.');
+  }
+}
+
+function runHackAnimation() {
+  typeTerminalLines(
+    [
+      'Iniciando protocolo...',
+      'Escaneando puertos... listo',
+      'Buscando mainframe... encontrado',
+      'Bypassing firewall [■■■■■■□□□□] 60%',
+      'Bypassing firewall [■■■■■■■■■■] 100%',
+      'Acceso concedido.',
+      '(Tranquilo, esto no hackea nada — es solo un chiste)',
+    ],
+    450
+  );
+}
+
+let matrixCanvas = null;
+let matrixFrame = null;
+function startMatrix() {
+  matrixCanvas = document.createElement('canvas');
+  matrixCanvas.id = 'matrixCanvas';
+  matrixCanvas.style.position = 'fixed';
+  matrixCanvas.style.inset = '0';
+  matrixCanvas.style.zIndex = '400';
+  matrixCanvas.style.pointerEvents = 'none';
+  document.body.appendChild(matrixCanvas);
+  matrixCanvas.width = window.innerWidth;
+  matrixCanvas.height = window.innerHeight;
+  const ctx = matrixCanvas.getContext('2d');
+  const fontSize = 16;
+  const columns = Math.floor(matrixCanvas.width / fontSize);
+  const drops = new Array(columns).fill(1);
+  const chars = 'アイウエオカキクケコサシスセソ0123456789';
+
+  function draw() {
+    ctx.fillStyle = 'rgba(4,4,8,0.08)';
+    ctx.fillRect(0, 0, matrixCanvas.width, matrixCanvas.height);
+    ctx.fillStyle = '#4ade80';
+    ctx.font = fontSize + 'px monospace';
+    drops.forEach((y, i) => {
+      const char = chars[Math.floor(Math.random() * chars.length)];
+      ctx.fillText(char, i * fontSize, y * fontSize);
+      if (y * fontSize > matrixCanvas.height && Math.random() > 0.975) {
+        drops[i] = 0;
+      }
+      drops[i]++;
+    });
+    matrixFrame = requestAnimationFrame(draw);
+  }
+  draw();
+}
+function stopMatrix() {
+  if (matrixFrame) cancelAnimationFrame(matrixFrame);
+  if (matrixCanvas) {
+    matrixCanvas.remove();
+    matrixCanvas = null;
+  }
+}
+function toggleMatrix() {
+  if (matrixCanvas) {
+    stopMatrix();
+    printTerminalLine('Matrix desactivado.');
+  } else {
+    startMatrix();
+    printTerminalLine('Matrix activado. Escribí "matrix" de nuevo para desactivarlo.');
+  }
 }
 
 terminalInput.addEventListener('keydown', (e) => {
@@ -267,11 +419,52 @@ terminalInput.addEventListener('keydown', (e) => {
   if (!raw) return;
 
   printTerminalLine('guest@cavedevz:~$ ' + raw);
-  const cmd = raw.toLowerCase();
   terminalInput.value = '';
+
+  if (terminalState.mode === 'guess') {
+    handleGuessInput(raw);
+    return;
+  }
+
+  terminalState.history.push(raw);
+  const cmd = raw.toLowerCase();
 
   if (cmd === 'clear') {
     terminalBody.innerHTML = '';
+    return;
+  }
+  if (cmd === 'help') {
+    printTerminalLine('Navegación: proyectos, about, contacto, whatsapp, github, linkedin');
+    printTerminalLine('Diversión: joke, fortune, coinflip, dice, guess, rps <piedra|papel|tijera>, calc <expresión>, time, matrix, hack, history');
+    printTerminalLine('Otros: whoami, sudo, clear');
+    return;
+  }
+  if (cmd === 'history') {
+    const prev = terminalState.history.slice(0, -1);
+    if (!prev.length) printTerminalLine('(todavía no escribiste otros comandos)');
+    else prev.forEach((h, idx) => printTerminalLine(`${idx + 1}  ${h}`));
+    return;
+  }
+  if (cmd === 'matrix') { toggleMatrix(); return; }
+  if (cmd === 'hack') { runHackAnimation(); return; }
+  if (cmd === 'joke' || cmd === 'chiste') { printTerminalLine(terminalJokes[Math.floor(Math.random() * terminalJokes.length)]); return; }
+  if (cmd === 'fortune') { printTerminalLine(terminalFortunes[Math.floor(Math.random() * terminalFortunes.length)]); return; }
+  if (cmd === 'coinflip' || cmd === 'moneda') { printTerminalLine(Math.random() < 0.5 ? 'Cara' : 'Cruz'); return; }
+  if (cmd === 'dice' || cmd === 'dado') { printTerminalLine('Salió ' + (Math.floor(Math.random() * 6) + 1)); return; }
+  if (cmd === 'time' || cmd === 'hora') { printTerminalLine(new Date().toLocaleString('es-CL')); return; }
+  if (cmd === 'guess' || cmd === 'adivina') {
+    terminalState.mode = 'guess';
+    terminalState.guessTarget = Math.floor(Math.random() * 100) + 1;
+    terminalState.guessAttempts = 0;
+    printTerminalLine('Pensé un número entre 1 y 100. Escribí un número para adivinar (o "salir" para cancelar).');
+    return;
+  }
+  if (cmd.startsWith('rps') || cmd.startsWith('ppt')) {
+    playRps(raw.split(' ')[1]);
+    return;
+  }
+  if (cmd.startsWith('calc ')) {
+    runCalc(raw.slice(5));
     return;
   }
 
@@ -294,6 +487,7 @@ terminalInput.addEventListener('keydown', (e) => {
     setTimeout(() => window.open(entry.open, '_blank', 'noopener'), 250);
   }
 });
+
 
 
 
