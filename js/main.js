@@ -44,6 +44,7 @@ if (!prefersReducedMotion) {
 }
 
 const bgGrid = document.querySelector('.bg-grid');
+const glowField = document.querySelector('.glow-field');
 const scrollProgress = document.getElementById('scrollProgress');
 
 function onScroll() {
@@ -55,6 +56,7 @@ function onScroll() {
 
   if (!prefersReducedMotion) {
     bgGrid.style.transform = `translateY(${scrollY * 0.15}px)`;
+    glowField.style.transform = `translateY(${scrollY * 0.06}px)`;
   }
 }
 window.addEventListener('scroll', onScroll);
@@ -74,5 +76,6 @@ if (!prefersReducedMotion && window.matchMedia('(pointer: fine)').matches) {
     });
   });
 }
+
 
 
