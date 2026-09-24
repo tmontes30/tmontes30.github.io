@@ -364,6 +364,7 @@ function runHackAnimation() {
 let matrixCanvas = null;
 let matrixFrame = null;
 let matrixClickHandler = null;
+let matrixKeyHandler = null;
 function startMatrix() {
   matrixCanvas = document.createElement('canvas');
   matrixCanvas.id = 'matrixCanvas';
@@ -397,11 +398,12 @@ function startMatrix() {
   }
   draw();
 
-  matrixClickHandler = () => {
-    stopMatrix();
-    printTerminalLine('Matrix desactivado (clic detectado).');
-  };
-  document.addEventListener('click', matrixClickHandler);
+  matrixClickHandler = () => stopMatrix();
+  matrixKeyHandler = () => stopMatrix();
+  setTimeout(() => {
+    document.addEventListener('click', matrixClickHandler);
+    document.addEventListener('keydown', matrixKeyHandler);
+  }, 0);
 }
 function stopMatrix() {
   if (matrixFrame) cancelAnimationFrame(matrixFrame);
@@ -413,14 +415,18 @@ function stopMatrix() {
     document.removeEventListener('click', matrixClickHandler);
     matrixClickHandler = null;
   }
+  if (matrixKeyHandler) {
+    document.removeEventListener('keydown', matrixKeyHandler);
+    matrixKeyHandler = null;
+  }
 }
 function toggleMatrix() {
   if (matrixCanvas) {
     stopMatrix();
-    printTerminalLine('Matrix desactivado.');
   } else {
+    printTerminalLine('Matrix activado — tocá, hacé clic o presioná cualquier tecla para volver.');
+    closeTerminal();
     startMatrix();
-    printTerminalLine('Matrix activado. Hacé clic en cualquier parte (o escribí "matrix" de nuevo) para desactivarlo.');
   }
 }
 
@@ -498,6 +504,7 @@ terminalInput.addEventListener('keydown', (e) => {
     setTimeout(() => window.open(entry.open, '_blank', 'noopener'), 250);
   }
 });
+
 
 
 
