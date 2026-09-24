@@ -363,6 +363,7 @@ function runHackAnimation() {
 
 let matrixCanvas = null;
 let matrixFrame = null;
+let matrixClickHandler = null;
 function startMatrix() {
   matrixCanvas = document.createElement('canvas');
   matrixCanvas.id = 'matrixCanvas';
@@ -395,12 +396,22 @@ function startMatrix() {
     matrixFrame = requestAnimationFrame(draw);
   }
   draw();
+
+  matrixClickHandler = () => {
+    stopMatrix();
+    printTerminalLine('Matrix desactivado (clic detectado).');
+  };
+  document.addEventListener('click', matrixClickHandler);
 }
 function stopMatrix() {
   if (matrixFrame) cancelAnimationFrame(matrixFrame);
   if (matrixCanvas) {
     matrixCanvas.remove();
     matrixCanvas = null;
+  }
+  if (matrixClickHandler) {
+    document.removeEventListener('click', matrixClickHandler);
+    matrixClickHandler = null;
   }
 }
 function toggleMatrix() {
@@ -409,7 +420,7 @@ function toggleMatrix() {
     printTerminalLine('Matrix desactivado.');
   } else {
     startMatrix();
-    printTerminalLine('Matrix activado. Escribí "matrix" de nuevo para desactivarlo.');
+    printTerminalLine('Matrix activado. Hacé clic en cualquier parte (o escribí "matrix" de nuevo) para desactivarlo.');
   }
 }
 
@@ -487,6 +498,7 @@ terminalInput.addEventListener('keydown', (e) => {
     setTimeout(() => window.open(entry.open, '_blank', 'noopener'), 250);
   }
 });
+
 
 
 
