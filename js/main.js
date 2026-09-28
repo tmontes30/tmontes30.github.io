@@ -278,7 +278,7 @@ const terminalCommands = {
   github: { open: 'https://github.com/tmontes30' },
   linkedin: { open: 'https://www.linkedin.com/in/tomas-montesa/' },
   whoami: 'Tomás Montes — desarrollador full-stack. Construye software que resuelve problemas reales.',
-  sudo: 'Permiso denegado. Pero un mensaje por WhatsApp seguro funciona — probá "whatsapp".',
+  sudo: 'Permiso denegado. Pero un mensaje por WhatsApp seguro funciona — prueba "whatsapp".',
 };
 
 const terminalState = { mode: null, guessTarget: 0, guessAttempts: 0, history: [] };
@@ -291,9 +291,9 @@ const terminalJokes = [
   'Mi código no tiene bugs, solo funcionalidades inesperadas.',
 ];
 const terminalFortunes = [
-  'El mejor código es el que no tenés que escribir.',
+  'El mejor código es el que no tienes que escribir.',
   'Todo bug es una feature que todavía no documentaste.',
-  'Primero hacelo funcionar, después hacelo bien, después hacelo rápido.',
+  'Primero hazlo funcionar, después hazlo bien, después hazlo rápido.',
   'La deuda técnica siempre cobra intereses.',
   'Un commit sin mensaje claro es un regalo envenenado para tu yo del futuro.',
 ];
@@ -323,7 +323,7 @@ function handleGuessInput(raw) {
   }
   const n = Number(raw);
   if (!Number.isInteger(n) || n < 1 || n > 100) {
-    printTerminalLine('Escribí un número entero entre 1 y 100 (o "salir").');
+    printTerminalLine('Escribe un número entero entre 1 y 100 (o "salir").');
     return;
   }
   terminalState.guessAttempts++;
@@ -358,7 +358,7 @@ function playRps(userChoiceRaw) {
   } else {
     result = 'Perdiste';
   }
-  printTerminalLine(`Vos: ${userChoice} — CPU: ${cpuChoice} → ${result}`);
+  printTerminalLine(`Tú: ${userChoice} — CPU: ${cpuChoice} → ${result}`);
 }
 
 function runCalc(expr) {
@@ -452,7 +452,7 @@ function toggleMatrix() {
   if (matrixCanvas) {
     stopMatrix();
   } else {
-    printTerminalLine('Matrix activado — tocá, hacé clic o presioná cualquier tecla para volver.');
+    printTerminalLine('Matrix activado — toca, haz clic o presiona cualquier tecla para volver.');
     closeTerminal();
     startMatrix();
   }
@@ -501,7 +501,7 @@ terminalInput.addEventListener('keydown', (e) => {
     terminalState.mode = 'guess';
     terminalState.guessTarget = Math.floor(Math.random() * 100) + 1;
     terminalState.guessAttempts = 0;
-    printTerminalLine('Pensé un número entre 1 y 100. Escribí un número para adivinar (o "salir" para cancelar).');
+    printTerminalLine('Pensé un número entre 1 y 100. Escribe un número para adivinar (o "salir" para cancelar).');
     return;
   }
   if (cmd.startsWith('rps') || cmd.startsWith('ppt')) {
@@ -515,7 +515,7 @@ terminalInput.addEventListener('keydown', (e) => {
 
   const entry = terminalCommands[cmd];
   if (!entry) {
-    printTerminalLine(`command not found: ${cmd} — probá "help"`);
+    printTerminalLine(`command not found: ${cmd} — prueba "help"`);
     return;
   }
 
@@ -532,6 +532,7 @@ terminalInput.addEventListener('keydown', (e) => {
     setTimeout(() => window.open(entry.open, '_blank', 'noopener'), 250);
   }
 });
+
 
 
 
