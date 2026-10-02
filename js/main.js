@@ -274,6 +274,10 @@ const terminalCommands = {
   about: { goto: '#about' },
   contacto: { goto: '#contacto' },
   contact: { goto: '#contacto' },
+  empresas: { page: 'soluciones-empresas.html' },
+  soluciones: { page: 'soluciones-empresas.html' },
+  inicio: { page: 'index.html' },
+  home: { page: 'index.html' },
   whatsapp: { open: 'https://wa.me/56992259960' },
   github: { open: 'https://github.com/tmontes30' },
   linkedin: { open: 'https://www.linkedin.com/in/tomas-montesa/' },
@@ -479,7 +483,7 @@ terminalInput.addEventListener('keydown', (e) => {
     return;
   }
   if (cmd === 'help') {
-    printTerminalLine('Navegación: proyectos, about, contacto, whatsapp, github, linkedin');
+    printTerminalLine('Navegación: proyectos, empresas, about, contacto, whatsapp, github, linkedin');
     printTerminalLine('Diversión: joke, fortune, coinflip, dice, guess, rps <piedra|papel|tijera>, calc <expresión>, time, matrix, hack, history');
     printTerminalLine('Otros: whoami, sudo, clear');
     return;
@@ -523,15 +527,26 @@ terminalInput.addEventListener('keydown', (e) => {
     printTerminalLine(entry);
   } else if (entry.goto) {
     printTerminalLine('Abriendo ' + cmd + '...');
+    const target = document.querySelector(entry.goto);
     setTimeout(() => {
       closeTerminal();
-      document.querySelector(entry.goto).scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+      if (target) {
+        target.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+      } else {
+        window.location.href = 'index.html' + entry.goto;
+      }
+    }, 300);
+  } else if (entry.page) {
+    printTerminalLine('Abriendo ' + cmd + '...');
+    setTimeout(() => {
+      window.location.href = entry.page;
     }, 300);
   } else if (entry.open) {
     printTerminalLine('Abriendo ' + cmd + ' en una pestaña nueva...');
     setTimeout(() => window.open(entry.open, '_blank', 'noopener'), 250);
   }
 });
+
 
 
 
