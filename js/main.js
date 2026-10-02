@@ -277,6 +277,7 @@ const terminalCommands = {
   empresas: { page: 'soluciones-empresas.html' },
   planes: { page: 'planes.html' },
   precios: { page: 'planes.html' },
+  cotizar: { page: 'cotizar.html' },
   soluciones: { page: 'soluciones-empresas.html' },
   inicio: { page: 'index.html' },
   home: { page: 'index.html' },
@@ -485,7 +486,7 @@ terminalInput.addEventListener('keydown', (e) => {
     return;
   }
   if (cmd === 'help') {
-    printTerminalLine('Navegación: proyectos, empresas, planes, about, contacto, whatsapp, github, linkedin');
+    printTerminalLine('Navegación: proyectos, empresas, planes, cotizar, about, contacto, whatsapp, github, linkedin');
     printTerminalLine('Diversión: joke, fortune, coinflip, dice, guess, rps <piedra|papel|tijera>, calc <expresión>, time, matrix, hack, history');
     printTerminalLine('Otros: whoami, sudo, clear');
     return;
@@ -548,6 +549,7 @@ terminalInput.addEventListener('keydown', (e) => {
     setTimeout(() => window.open(entry.open, '_blank', 'noopener'), 250);
   }
 });
+
 
 
 
