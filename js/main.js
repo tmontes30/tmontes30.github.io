@@ -18,7 +18,7 @@ nav.querySelectorAll('.nav-links a').forEach((link) => {
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 const revealTargets = document.querySelectorAll(
-  '.card, .about-grid, .contact-link, .section-head, .hero-sub, .hero-actions, .about-badges span'
+  '.card, .about-grid, .contact-link, .section-head, .hero-sub, .hero-actions, .about-badges span, .project-detail'
 );
 
 if (!prefersReducedMotion) {
@@ -269,8 +269,8 @@ document.addEventListener('keydown', (e) => {
 });
 
 const terminalCommands = {
-  proyectos: { goto: '#proyectos' },
-  proyecto: { goto: '#proyectos' },
+  proyectos: { page: 'proyectos.html' },
+  proyecto: { page: 'proyectos.html' },
   about: { goto: '#about' },
   contacto: { goto: '#contacto' },
   contact: { goto: '#contacto' },
@@ -546,6 +546,7 @@ terminalInput.addEventListener('keydown', (e) => {
     setTimeout(() => window.open(entry.open, '_blank', 'noopener'), 250);
   }
 });
+
 
 
 
