@@ -473,6 +473,41 @@ main section { padding: 90px clamp(20px, 6vw, 72px); max-width: 1100px; margin: 
 .process-step h3 { margin: 0 0 8px; font-size: 1.05rem; }
 .process-step p { margin: 0; color: var(--text-dim); font-size: 0.9rem; }
 
+/* Detailed project case studies on the Proyectos page */
+.project-detail {
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 32px clamp(20px, 4vw, 40px);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px 32px;
+  margin-bottom: 24px;
+  transition: border-color 0.2s;
+}
+.project-detail:hover { border-color: var(--accent-1); }
+.project-detail-head {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.project-detail-head h3 { margin: 10px 0 0; font-size: 1.4rem; }
+.project-detail-block h4 {
+  margin: 0 0 8px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--accent-2);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.project-detail-block p { margin: 0; color: var(--text-dim); font-size: 0.92rem; }
+@media (max-width: 760px) {
+  .project-detail { grid-template-columns: 1fr; }
+}
+
 /* Project cards */
 .cards {
   display: grid;
@@ -662,6 +697,7 @@ main section { padding: 90px clamp(20px, 6vw, 72px); max-width: 1100px; margin: 
   .whatsapp-float-text { display: none; }
   .whatsapp-float { padding: 14px; }
 }
+
 
 
 
