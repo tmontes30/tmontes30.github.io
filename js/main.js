@@ -284,8 +284,8 @@ const terminalCommands = {
   proyectos: { page: 'proyectos.html' },
   proyecto: { page: 'proyectos.html' },
   about: { goto: '#about' },
-  contacto: { goto: '#contacto' },
-  contact: { goto: '#contacto' },
+  contacto: { page: 'contacto.html' },
+  contact: { page: 'contacto.html' },
   empresas: { page: 'soluciones-empresas.html' },
   planes: { page: 'planes.html' },
   precios: { page: 'planes.html' },
@@ -561,6 +561,7 @@ terminalInput.addEventListener('keydown', (e) => {
     setTimeout(() => window.open(entry.open, '_blank', 'noopener'), 250);
   }
 });
+
 
 
 
