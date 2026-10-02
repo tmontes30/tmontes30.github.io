@@ -40,6 +40,7 @@
     <span>Cave<em>Devz</em></span>
   </a>
   <nav class="nav-links">
+    <a href="index.html">Inicio</a>
     <a href="proyectos.html">Proyectos</a>
     <a href="soluciones-empresas.html">Soluciones Empresas</a>
     <a href="planes.html">Planes</a>
@@ -70,7 +71,7 @@
       <input type="hidden" name="_subject" value="Cotización CaveDevz">
       <input type="hidden" name="_template" value="table">
       <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_next" value="https://cavedevz.com/cotizar.html?enviado=1">
+      <input type="hidden" name="_next" value="https://cavedevz.com/?enviado=1">
 
       <label class="quote-field">
         <span>Nombre</span>
@@ -100,13 +101,6 @@
 
       <button type="submit" class="btn btn-primary">Enviar cotización</button>
     </form>
-
-    <div id="thankYou" class="quote-thankyou" hidden>
-      <p class="section-eyebrow">// listo</p>
-      <h2>¡Gracias! Ya recibimos tu mensaje.</h2>
-      <p class="contact-sub">Te vamos a responder directo a tu correo apenas lo revisemos.</p>
-      <a href="index.html" class="btn btn-ghost">Volver al inicio</a>
-    </div>
   </section>
 </main>
 
@@ -145,7 +139,6 @@
 <script>
   (function () {
     const form = document.getElementById('quoteForm');
-    const thankYou = document.getElementById('thankYou');
     const params = new URLSearchParams(window.location.search);
 
     const servicio = params.get('servicio');
@@ -153,11 +146,6 @@
       const select = document.getElementById('servicioSelect');
       const match = Array.from(select.options).find((o) => o.value === servicio);
       if (match) select.value = servicio;
-    }
-
-    if (params.get('enviado') === '1') {
-      form.hidden = true;
-      thankYou.hidden = false;
     }
 
     form.addEventListener('submit', () => {
@@ -168,4 +156,5 @@
 </script>
 </body>
 </html>
+
 
