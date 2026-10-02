@@ -294,7 +294,6 @@ const terminalCommands = {
   inicio: { page: 'index.html' },
   home: { page: 'index.html' },
   whatsapp: { open: 'https://wa.me/56992259960' },
-  github: { open: 'https://github.com/tmontes30' },
   linkedin: { open: 'https://www.linkedin.com/in/tomas-montesa/' },
   whoami: 'Tomás Montes — desarrollador full-stack. Construye software que resuelve problemas reales.',
   sudo: 'Permiso denegado. Pero un mensaje por WhatsApp seguro funciona — prueba "whatsapp".',
@@ -498,7 +497,7 @@ terminalInput.addEventListener('keydown', (e) => {
     return;
   }
   if (cmd === 'help') {
-    printTerminalLine('Navegación: proyectos, empresas, planes, cotizar, about, contacto, whatsapp, github, linkedin');
+    printTerminalLine('Navegación: proyectos, empresas, planes, cotizar, about, contacto, whatsapp, linkedin');
     printTerminalLine('Diversión: joke, fortune, coinflip, dice, guess, rps <piedra|papel|tijera>, calc <expresión>, time, matrix, hack, history');
     printTerminalLine('Otros: whoami, sudo, clear');
     return;
@@ -561,6 +560,7 @@ terminalInput.addEventListener('keydown', (e) => {
     setTimeout(() => window.open(entry.open, '_blank', 'noopener'), 250);
   }
 });
+
 
 
 
