@@ -61,6 +61,18 @@ if (contactoSection && contactLinksEl && !prefersReducedMotion) {
   contactObserver.observe(contactoSection);
 }
 
+// Confirmation toast after a quote request redirects back to the homepage
+const quoteToast = document.getElementById('quoteToast');
+if (quoteToast) {
+  const quoteParams = new URLSearchParams(window.location.search);
+  if (quoteParams.get('enviado') === '1') {
+    quoteToast.hidden = false;
+    requestAnimationFrame(() => quoteToast.classList.add('show'));
+    setTimeout(() => quoteToast.classList.remove('show'), 5000);
+    history.replaceState({}, '', window.location.pathname);
+  }
+}
+
 const bgGrid = document.querySelector('.bg-grid');
 const glowField = document.querySelector('.glow-field');
 const scrollProgress = document.getElementById('scrollProgress');
@@ -549,6 +561,7 @@ terminalInput.addEventListener('keydown', (e) => {
     setTimeout(() => window.open(entry.open, '_blank', 'noopener'), 250);
   }
 });
+
 
 
 
