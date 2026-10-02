@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proyectos — CaveDevz</title>
+<meta name="description" content="El detalle de cada proyecto de CaveDevz: qué problema resuelve, para quién es y cómo funciona.">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="bg-grid" aria-hidden="true"></div>
+<div class="glow-field" aria-hidden="true">
+  <span class="glow-orb glow-orb-1"></span>
+  <span class="glow-orb glow-orb-2"></span>
+  <span class="glow-orb glow-orb-3"></span>
+</div>
+<canvas id="particleCanvas" class="particle-canvas" aria-hidden="true"></canvas>
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+<div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+<div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
+
+<header class="nav" id="nav">
+  <a href="index.html" class="logo">
+    <svg viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+      <path d="M22 20 L12 32 L22 44" stroke="url(#navGrad)" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M42 20 L52 32 L42 44" stroke="url(#navGrad)" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M36 16 L28 48" stroke="url(#navGrad)" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <defs>
+        <linearGradient id="navGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#7c5cff"/>
+          <stop offset="100%" stop-color="#22d3ee"/>
+        </linearGradient>
+      </defs>
+    </svg>
+    <span>Cave<em>Devz</em></span>
+  </a>
+  <nav class="nav-links">
+    <a href="proyectos.html">Proyectos</a>
+    <a href="soluciones-empresas.html">Soluciones Empresas</a>
+    <a href="index.html#about">About</a>
+    <a href="index.html#contacto">Contacto</a>
+  </nav>
+  <a href="https://wa.me/56992259960" target="_blank" rel="noopener" class="btn btn-ghost nav-cta">
+    <svg viewBox="0 0 448 512" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7 .9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
+    Hablemos
+  </a>
+  <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<main>
+  <section class="hero" id="top">
+    <h1 class="hero-title">
+      Cada proyecto nace de un <span class="shine-text">problema</span> <span class="grad-text">real</span>.
+    </h1>
+    <p class="hero-sub">
+      Acá está el detalle de cada uno: para quién es, qué dolor resuelve y cómo lo resuelve.
+    </p>
+  </section>
+
+  <section class="proyectos" id="detalle">
+    <div class="section-head">
+      <p class="section-eyebrow">// en profundidad</p>
+      <h2>El detalle de cada proyecto</h2>
+    </div>
+
+    <article class="project-detail">
+      <div class="project-detail-head">
+        <div>
+          <span class="card-tag">Fintech</span>
+          <h3>Finance Service</h3>
+        </div>
+        <a href="https://finance.cavedevz.com" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Ver sitio ↗</a>
+      </div>
+      <div class="project-detail-block">
+        <h4>El problema</h4>
+        <p>
+          Revisar extractos bancarios línea por línea para entender en qué se va la plata es lento y
+          tedioso. La mayoría termina usando planillas manuales que se desactualizan a la semana.
+        </p>
+      </div>
+      <div class="project-detail-block">
+        <h4>La solución</h4>
+        <p>
+          Una plataforma que procesa extractos bancarios de forma automática, extrae cada movimiento
+          y lo organiza en un panel claro — sin tipear nada a mano.
+        </p>
+      </div>
+    </article>
+
+    <article class="project-detail">
+      <div class="project-detail-head">
+        <div>
+          <span class="card-tag">Logística</span>
+          <h3>Puntos Colaborativos Falabella</h3>
+        </div>
+        <a href="https://puntos-colaborativos-falabella.cavedevz.com" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Ver sitio ↗</a>
+      </div>
+      <div class="project-detail-block">
+        <h4>El problema</h4>
+        <p>
+          Los vendedores no siempre saben cuál es su punto de recolección colaborativa más cercano,
+          y terminan perdiendo tiempo preguntando o eligiendo uno que les queda lejos.
+        </p>
+      </div>
+      <div class="project-detail-block">
+        <h4>La solución</h4>
+        <p>
+          Un mapa interactivo que calcula distancias en tiempo real y permite filtrar por zona y
+          disponibilidad, para encontrar el punto correcto en segundos.
+        </p>
+      </div>
+    </article>
+
+    <article class="project-detail">
+      <div class="project-detail-head">
+        <div>
+          <span class="card-tag">Fitness</span>
+          <h3>Momentum</h3>
+        </div>
+        <a href="https://cavedevz.com/momentum/" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Ver sitio ↗</a>
+      </div>
+      <div class="project-detail-block">
+        <h4>El problema</h4>
+        <p>
+          Mucha gente empieza a entrenar sin un plan claro, no lleva registro de su progreso y termina
+          abandonando porque no sabe si está avanzando o no.
+        </p>
+      </div>
+      <div class="project-detail-block">
+        <h4>La solución</h4>
+        <p>
+          Rutinas de gimnasio personalizadas con seguimiento de progreso, construido sobre Firebase,
+          para que cada sesión tenga un propósito y el avance quede a la vista.
+        </p>
+      </div>
+    </article>
+
+    <article class="project-detail">
+      <div class="project-detail-head">
+        <div>
+          <span class="card-tag">Personal</span>
+          <h3>Trip Planner</h3>
+        </div>
+        <a href="https://cavedevz.com/viaje-2027/" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Ver sitio ↗</a>
+      </div>
+      <div class="project-detail-block">
+        <h4>El problema</h4>
+        <p>
+          Organizar un viaje termina siendo un caos de notas sueltas, chats y planillas que nadie
+          actualiza: itinerario por un lado, presupuesto por otro, actividades en la cabeza de alguien.
+        </p>
+      </div>
+      <div class="project-detail-block">
+        <h4>La solución</h4>
+        <p>
+          Una app para planificar viajes de principio a fin, con itinerario día a día y presupuesto,
+          todo centralizado en un solo lugar.
+        </p>
+      </div>
+    </article>
+  </section>
+
+  <section class="contacto" id="contacto-proyectos">
+    <div class="section-head center">
+      <p class="section-eyebrow">// y tu idea?</p>
+      <h2>¿Tienes un problema parecido en tu empresa?</h2>
+      <p class="contact-sub">Hacemos lo mismo, a medida, para procesos de negocio reales.</p>
+    </div>
+    <div class="hero-actions" style="justify-content:center;">
+      <a href="soluciones-empresas.html" class="btn btn-primary">Ver soluciones para empresas ↗</a>
+      <a href="https://wa.me/56992259960" target="_blank" rel="noopener" class="btn btn-ghost">Escribir por WhatsApp</a>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <p>© <span id="year"></span> CaveDevz. Construido con HTML, CSS y JS puro.</p>
+  <p class="footer-tip">Tip: presiona <kbd>/</kbd> para abrir la terminal</p>
+</footer>
+
+<div class="quick-actions">
+  <button class="terminal-trigger" id="terminalTrigger" aria-label="Abrir terminal (tecla /)">&gt;_</button>
+  <a href="https://wa.me/56992259960" target="_blank" rel="noopener" class="whatsapp-float" aria-label="Chatear por WhatsApp">
+    <svg viewBox="0 0 448 512" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7 .9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
+    <span class="whatsapp-float-text">Hablemos</span>
+  </a>
+</div>
+
+<div class="terminal-overlay" id="terminalOverlay" hidden>
+  <div class="terminal-window" role="dialog" aria-modal="true" aria-label="Terminal CaveDevz">
+    <div class="terminal-titlebar">
+      <span class="term-dot term-dot-red"></span>
+      <span class="term-dot term-dot-yellow"></span>
+      <span class="term-dot term-dot-green"></span>
+      <span class="terminal-title">guest@cavedevz: ~</span>
+    </div>
+    <div class="terminal-body" id="terminalBody">
+      <p>Bienvenido a CaveDevz. Escribe <strong>help</strong> para ver los comandos — hay algunos solo por diversión (prueba <strong>matrix</strong> o <strong>guess</strong>).</p>
+    </div>
+    <div class="terminal-input-row">
+      <span class="terminal-prompt">guest@cavedevz:~$</span>
+      <input type="text" id="terminalInput" class="terminal-input" autocomplete="off" spellcheck="false" autocapitalize="off" aria-label="Comando de terminal">
+    </div>
+  </div>
+</div>
+
+<script src="js/main.js"></script>
+</body>
+</html>
