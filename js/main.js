@@ -15,6 +15,15 @@ nav.querySelectorAll('.nav-links a').forEach((link) => {
   });
 });
 
+// Highlight the current page in the nav so the user always knows where they are
+const currentFile = window.location.pathname.split('/').pop() || 'index.html';
+nav.querySelectorAll('.nav-links a').forEach((link) => {
+  const href = link.getAttribute('href');
+  if (href.includes('#about')) return;
+  const linkFile = href.split('#')[0] || 'index.html';
+  if (linkFile === currentFile) link.classList.add('active');
+});
+
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 const revealTargets = document.querySelectorAll(
@@ -71,6 +80,18 @@ if (quoteToast) {
     setTimeout(() => quoteToast.classList.remove('show'), 5000);
     history.replaceState({}, '', window.location.pathname);
   }
+}
+
+// Prevent double-submits on the quote form and show a loading state
+const quoteFormEl = document.getElementById('quoteForm');
+if (quoteFormEl) {
+  quoteFormEl.addEventListener('submit', () => {
+    const submitBtn = quoteFormEl.querySelector('button[type="submit"]');
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Enviando...';
+    }
+  });
 }
 
 const bgGrid = document.querySelector('.bg-grid');
