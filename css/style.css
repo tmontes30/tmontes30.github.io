@@ -1,14 +1,14 @@
 :root {
-  --bg: #08080c;
-  --bg-elev: #101018;
-  --bg-elev-2: #15151f;
-  --border: #23232f;
-  --text: #e8e8f0;
-  --text-dim: #9797ab;
-  --text-faint: #64647a;
-  --accent-1: #7c5cff;
-  --accent-2: #22d3ee;
-  --accent-green: #4ade80;
+  --bg: #020617;
+  --bg-elev: #0e1223;
+  --bg-elev-2: #141a2e;
+  --border: #334155;
+  --text: #f8fafc;
+  --text-dim: #94a3b8;
+  --text-faint: #64748b;
+  --accent-1: #16a34a;
+  --accent-2: #22c55e;
+  --accent-green: #22c55e;
   --radius: 14px;
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
@@ -50,8 +50,8 @@ ul { list-style: none; margin: 0; padding: 0; }
   inset: 0;
   z-index: -1;
   background-image:
-    linear-gradient(rgba(124,92,255,0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(124,92,255,0.06) 1px, transparent 1px);
+    linear-gradient(rgba(22,163,74,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(22,163,74,0.06) 1px, transparent 1px);
   background-size: 48px 48px;
   mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
 }
@@ -139,14 +139,14 @@ ul { list-style: none; margin: 0; padding: 0; }
 .cursor-ring {
   width: 32px;
   height: 32px;
-  border: 1px solid rgba(124,92,255,0.6);
+  border: 1px solid rgba(22,163,74,0.6);
   border-radius: 50%;
   transition: width 0.2s ease, height 0.2s ease, border-color 0.2s ease, background 0.2s ease;
 }
 .cursor-ring.cursor-hover {
   width: 54px;
   height: 54px;
-  background: rgba(124,92,255,0.12);
+  background: rgba(22,163,74,0.12);
   border-color: var(--accent-2);
 }
 html.has-custom-cursor .cursor-dot,
@@ -420,7 +420,7 @@ html.has-custom-cursor textarea {
 /* Nav gains depth once the page has scrolled */
 .nav.scrolled {
   box-shadow: 0 8px 24px rgba(0,0,0,0.35);
-  border-bottom-color: rgba(124,92,255,0.25);
+  border-bottom-color: rgba(22,163,74,0.25);
 }
 
 .hero-actions {
@@ -458,8 +458,8 @@ main section { padding: 90px clamp(20px, 6vw, 72px); max-width: 1100px; margin: 
   font-family: var(--font-mono);
   font-size: 0.8rem;
   color: var(--accent-green);
-  background: rgba(74, 222, 128, 0.1);
-  border: 1px solid rgba(74, 222, 128, 0.3);
+  background: rgba(34,197,94,0.1);
+  border: 1px solid rgba(34,197,94,0.3);
   padding: 6px 14px;
   border-radius: 999px;
   margin: 14px 0 0;
@@ -478,8 +478,8 @@ main section { padding: 90px clamp(20px, 6vw, 72px); max-width: 1100px; margin: 
   justify-content: space-between;
   gap: 24px;
   padding: 32px clamp(20px, 4vw, 40px);
-  background: linear-gradient(135deg, rgba(124,92,255,0.14), rgba(34,211,238,0.08));
-  border: 1px solid rgba(124,92,255,0.35);
+  background: linear-gradient(135deg, rgba(22,163,74,0.14), rgba(34,197,94,0.08));
+  border: 1px solid rgba(22,163,74,0.35);
   border-radius: var(--radius);
 }
 .biz-teaser-inner h2 { margin: 0 0 8px; font-size: 1.3rem; max-width: 36ch; }
@@ -620,7 +620,7 @@ main section { padding: 90px clamp(20px, 6vw, 72px); max-width: 1100px; margin: 
 .quote-field select:focus,
 .quote-field textarea:focus {
   border-color: var(--accent-1);
-  box-shadow: 0 0 0 3px rgba(124, 92, 255, 0.18);
+  box-shadow: 0 0 0 3px rgba(22,163,74,0.18);
 }
 .quote-form .btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
 .quote-field textarea { resize: vertical; min-height: 110px; }
@@ -672,8 +672,8 @@ main section { padding: 90px clamp(20px, 6vw, 72px); max-width: 1100px; margin: 
   font-family: var(--font-mono);
   font-size: 0.72rem;
   color: var(--accent-2);
-  background: rgba(34,211,238,0.1);
-  border: 1px solid rgba(34,211,238,0.25);
+  background: rgba(34,197,94,0.1);
+  border: 1px solid rgba(34,197,94,0.25);
   padding: 4px 10px;
   border-radius: 999px;
 }
@@ -764,11 +764,11 @@ main section { padding: 90px clamp(20px, 6vw, 72px); max-width: 1100px; margin: 
 /* Noticeable glow that draws the eye to Contacto once the user scrolls there */
 @keyframes contact-glow-pulse {
   0%, 100% {
-    box-shadow: 0 0 0 rgba(124,92,255,0);
+    box-shadow: 0 0 0 rgba(22,163,74,0);
     border-color: var(--border);
   }
   50% {
-    box-shadow: 0 0 30px 6px rgba(124,92,255,0.55), 0 0 60px 10px rgba(34,211,238,0.3);
+    box-shadow: 0 0 30px 6px rgba(22,163,74,0.55), 0 0 60px 10px rgba(34,197,94,0.3);
     border-color: var(--accent-2);
   }
 }
