@@ -233,8 +233,8 @@ if (particleCanvas && !prefersReducedMotion) {
           const proximity = 1 - dist / 190;
           ctx.save();
           ctx.shadowBlur = 10;
-          ctx.shadowColor = 'rgba(34,197,94,0.9)';
-          ctx.strokeStyle = `rgba(34,197,94,${proximity * 0.95})`;
+          ctx.shadowColor = 'rgba(34,211,238,0.9)';
+          ctx.strokeStyle = `rgba(34,211,238,${proximity * 0.95})`;
           ctx.lineWidth = 1.8;
           ctx.beginPath();
           ctx.moveTo(p.x, p.y);
@@ -255,7 +255,7 @@ if (particleCanvas && !prefersReducedMotion) {
         const dy = p.y - q.y;
         const dist = Math.hypot(dx, dy);
         if (dist < 110) {
-          ctx.strokeStyle = `rgba(34,197,94,${(1 - dist / 110) * 0.25})`;
+          ctx.strokeStyle = `rgba(34,211,238,${(1 - dist / 110) * 0.25})`;
           ctx.lineWidth = 1;
           ctx.beginPath();
           ctx.moveTo(p.x, p.y);
