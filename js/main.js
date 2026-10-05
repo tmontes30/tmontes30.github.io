@@ -27,7 +27,7 @@ nav.querySelectorAll('.nav-links a').forEach((link) => {
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 const revealTargets = document.querySelectorAll(
-  '.card, .about-grid, .contact-link, .section-head, .hero-sub, .hero-actions, .about-badges span, .project-detail'
+  '.card, .about-grid, .contact-link, .section-head, .hero-sub, .hero-actions, .about-badges span, .project-detail, .proof-item'
 );
 
 if (!prefersReducedMotion) {
