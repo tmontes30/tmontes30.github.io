@@ -27,7 +27,7 @@ nav.querySelectorAll('.nav-links a').forEach((link) => {
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 const revealTargets = document.querySelectorAll(
-  '.card, .about-grid, .contact-link, .section-head, .hero-sub, .hero-actions, .about-badges span, .project-detail, .proof-item'
+  '.card, .about-grid, .contact-link, .section-head, .hero-sub, .hero-actions, .about-badges span, .project-detail, .proof-item, .exp-item'
 );
 
 if (!prefersReducedMotion) {
@@ -304,7 +304,7 @@ document.addEventListener('keydown', (e) => {
 const terminalCommands = {
   proyectos: { page: 'proyectos.html' },
   proyecto: { page: 'proyectos.html' },
-  about: { goto: '#about' },
+  about: { page: 'about.html' },
   contacto: { page: 'contacto.html' },
   contact: { page: 'contacto.html' },
   empresas: { page: 'soluciones-empresas.html' },
