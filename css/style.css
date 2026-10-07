@@ -378,6 +378,17 @@ html.has-custom-cursor textarea {
   margin: 0 auto;
 }
 
+.profile-photo {
+  display: block;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--accent-1);
+  box-shadow: 0 0 0 4px rgba(124,92,255,0.15), 0 8px 24px rgba(0,0,0,0.4);
+  margin-bottom: 24px;
+}
+
 .hero-title {
   font-size: clamp(2.2rem, 6vw, 4rem);
   font-weight: 800;
