@@ -749,6 +749,7 @@ main section { padding: 90px clamp(20px, 6vw, 72px); max-width: 1100px; margin: 
   grid-template-columns: 1.6fr 1fr;
   gap: 40px;
 }
+.about-grid.even { grid-template-columns: 1fr 1fr; }
 .about-text { color: var(--text-dim); font-size: 1rem; }
 .about-badges {
   display: flex;
@@ -765,6 +766,36 @@ main section { padding: 90px clamp(20px, 6vw, 72px); max-width: 1100px; margin: 
   border-radius: 8px;
   color: var(--text);
 }
+
+/* Skills grid on the about page: two even columns, reuses .about-text/.about-badges */
+.about-grid .about-badges { margin-top: 0; }
+
+/* Experience timeline on the about page */
+.exp-list { display: flex; flex-direction: column; gap: 20px; }
+.exp-item {
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent-1);
+  border-radius: var(--radius);
+  padding: 22px 26px;
+}
+.exp-item-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px 16px;
+  margin-bottom: 4px;
+}
+.exp-item-head h3 { margin: 0; font-size: 1.05rem; }
+.exp-date {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--accent-2);
+  white-space: nowrap;
+}
+.exp-company { color: var(--text-faint); font-size: 0.85rem; margin: 0 0 10px; }
+.exp-item p:last-child { color: var(--text-dim); margin: 0; font-size: 0.92rem; }
 
 /* Contact */
 .contact-links {
